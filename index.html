@@ -52,9 +52,9 @@
         <div class="relative z-20 mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                    Enter | Your | Order
+                    Welcome
                     <br>
-                    <span class="text-blue-600">Place Order 📝
+                    <span class="text-blue-600">Place Order Here 📝
             </span>
                 </h1>
                 <h2 class="mt-6 text-lg leading-8 text-gray-600">
@@ -66,11 +66,11 @@
     <h2 class="text-2xl font-bold mb-4">Order Form</h2>
     <div class="mb-4">
         <label for="date-time" class="block mb-1">Date/Time</label>
-        <input type="date-time" id="date-time" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="text" id="date-time" readonly class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="mb-4">
         <label for="order-id" class="block mb-1">Order ID</label>
-        <input type="order-id" id="order-id" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="text" id="order-id" readonly class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="mb-4">
         <label for="order-name" class="block mb-1">Order Name</label>
@@ -83,7 +83,7 @@
 
 
     <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
-    <button type="cancel" class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</button>
+    <button type="reset" class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</button>
 
 </form>
 
@@ -105,15 +105,15 @@
                 class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
                 <svg class="h-[60rem] w-[100rem] flex-none stroke-blue-600 opacity-20" aria-hidden="true">
                     <defs>
-                        <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" width="200" height="200" x="50%" y="50%"
-                            patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
-                            <path d="M.5 200V.5H200" fill="none"></path>
-                        </pattern>
+                    <pattern id="status-pattern" width="200" height="200" x="50%" y="50%"
+                        patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
+                        <path d="M.5 200V.5H200" fill="none"></path>
+                    </pattern>
                     </defs>
                     <svg x="50%" y="50%" class="overflow-visible fill-blue-50">
                         <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" stroke-width="0"></path>
                     </svg>
-                    <rect width="100%" height="100%" stroke-width="0" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)">
+                    <rect width="100%" height="100%" stroke-width="0" fill="url(#status-pattern)">
                     </rect>
                 </svg>
             </div>
@@ -179,9 +179,6 @@
     </tbody>
   </table>
 </div>
-
-
-
             </div>
             <div class="relative mx-auto mt-10 max-w-lg">
                 <img class="w-full rounded-2xl border border-gray-100 shadow" src="order2.jpg" alt="order-food">
@@ -200,7 +197,7 @@
                 class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
                 <svg class="h-[60rem] w-[100rem] flex-none stroke-blue-600 opacity-20" aria-hidden="true">
                     <defs>
-                        <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" width="200" height="200" x="50%" y="50%"
+                        <pattern id="operator-pattern" width="200" height="200" x="50%" y="50%"
                             patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
                             <path d="M.5 200V.5H200" fill="none"></path>
                         </pattern>
@@ -208,7 +205,7 @@
                     <svg x="50%" y="50%" class="overflow-visible fill-blue-50">
                         <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" stroke-width="0"></path>
                     </svg>
-                    <rect width="100%" height="100%" stroke-width="0" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)">
+                    <rect width="100%" height="100%" stroke-width="0" fill="url(#operator-pattern)">
                     </rect>
                 </svg>
             </div>
@@ -270,6 +267,9 @@
       document.body.innerHTML = "<h1>Invalid mode specified</h1>";
     }
   </script>
+
+  <script src="app.js" type="module"></script>
+
 </body>
 
 </html>
