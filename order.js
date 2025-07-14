@@ -17,7 +17,8 @@ function order_init() {
             id: parseInt(idInput.value),
             name: nameInput.value,
             quantity: parseInt(quantityInput.value),
-            createdAt: createdAtInput.value
+            createdAt: createdAtInput.value,
+            status: "Coming soon"
         };
         // Add new order to Map
         ordersMap.set(parseInt(idInput.value), newOrder);
@@ -43,4 +44,4 @@ function prefillFields() {
     idInput.value = newId.toString();
     createdAtInput.value = new Date().toLocaleString();
 }
-export { order_init, prefillFields };
+export { order_init, prefillFields, };

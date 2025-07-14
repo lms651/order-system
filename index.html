@@ -128,57 +128,24 @@
                 </h1>
                 <h2 class="mt-6 text-lg leading-8 text-gray-600">
                     Keep track of where you are in the order pickup line
-                </h2>
+                </h2><br>
 
-                <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
-  <table class="min-w-full divide-y-2 divide-gray-200">
-    <thead class="ltr:text-left rtl:text-right">
-      <tr class="*:font-medium *:text-gray-900">
-        <th class="px-3 py-2 whitespace-nowrap">ID</th>
-        <th class="px-3 py-2 whitespace-nowrap">Order Name</th>
-        <th class="px-3 py-2 whitespace-nowrap">Created</th>
-        <th class="px-3 py-2 whitespace-nowrap">Status</th>
-      </tr>
-    </thead>
-
-    <tbody class="divide-y divide-gray-200">
-      <tr class="*:text-gray-900 *:first:font-medium">
-        <td class="px-3 py-2 whitespace-nowrap">Nandor the Relentless</td>
-        <td class="px-3 py-2 whitespace-nowrap">04/06/1262</td>
-        <td class="px-3 py-2 whitespace-nowrap">Vampire Warrior</td>
-        <td class="px-3 py-2 whitespace-nowrap">$0</td>
-      </tr>
-
-      <tr class="*:text-gray-900 *:first:font-medium">
-        <td class="px-3 py-2 whitespace-nowrap">Laszlo Cravensworth</td>
-        <td class="px-3 py-2 whitespace-nowrap">19/10/1678</td>
-        <td class="px-3 py-2 whitespace-nowrap">Vampire Gentleman</td>
-        <td class="px-3 py-2 whitespace-nowrap">$0</td>
-      </tr>
-
-      <tr class="*:text-gray-900 *:first:font-medium">
-        <td class="px-3 py-2 whitespace-nowrap">Nadja</td>
-        <td class="px-3 py-2 whitespace-nowrap">15/03/1593</td>
-        <td class="px-3 py-2 whitespace-nowrap">Vampire Seductress</td>
-        <td class="px-3 py-2 whitespace-nowrap">$0</td>
-      </tr>
-
-      <tr class="*:text-gray-900 *:first:font-medium">
-        <td class="px-3 py-2 whitespace-nowrap">Colin Robinson</td>
-        <td class="px-3 py-2 whitespace-nowrap">01/09/1971</td>
-        <td class="px-3 py-2 whitespace-nowrap">Energy Vampire</td>
-        <td class="px-3 py-2 whitespace-nowrap">$53,000</td>
-      </tr>
-
-      <tr class="*:text-gray-900 *:first:font-medium">
-        <td class="px-3 py-2 whitespace-nowrap">Guillermo de la Cruz</td>
-        <td class="px-3 py-2 whitespace-nowrap">18/11/1991</td>
-        <td class="px-3 py-2 whitespace-nowrap">Familiar/Vampire Hunter</td>
-        <td class="px-3 py-2 whitespace-nowrap">$0</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <!--ORDER STATUS DISPLAY TABLE-->
+    <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
+    <table class="min-w-full divide-y-2 divide-gray-200">
+        <thead class="ltr:text-left rtl:text-right">
+        <tr class="*:font-medium *:text-gray-900">
+            <th class="px-3 py-2 whitespace-nowrap">ID</th>
+            <th class="px-3 py-2 whitespace-nowrap">Order Name</th>
+            <th class="px-3 py-2 whitespace-nowrap">Created</th>
+            <th class="px-3 py-2 whitespace-nowrap">Status</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+        <!--Rows with orders will be inserted dynamically here -->
+        </tbody>
+    </table>
+    </div>
             </div>
             <div class="relative mx-auto mt-10 max-w-lg">
                 <img class="w-full rounded-2xl border border-gray-100 shadow" src="order2.jpg" alt="order-food">
@@ -220,27 +187,24 @@
                 </h1>
                 <h2 class="mt-6 text-lg leading-8 text-gray-600">
                     Staff can make changes to the orders here
-                </h2>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a class="isomorphic-link isomorphic-link--internal inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                        href="/login">Customer
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
+                </h2><br>
+
+                <!--EDIT ORDER DISPLAY TABLE-->
+                <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
+                <table id="operator-table" class="min-w-full divide-y-2 divide-gray-200">
+                    <thead class="ltr:text-left rtl:text-right">
+                    <tr class="*:font-medium *:text-gray-900">
+                        <th class="px-3 py-2 whitespace-nowrap">ID</th>
+                        <th class="px-3 py-2 whitespace-nowrap">Order Name</th>
+                        <th class="px-3 py-2 whitespace-nowrap">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                    <!--Rows with orders will be inserted dynamically here -->
+                    </tbody>
+                </table>
                 </div>
-                    <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a class="isomorphic-link isomorphic-link--internal inline-flex items-center justify-center gap-2 rounded-xl bg-red-500 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                        href="/login">Operator
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                </div>
+
             </div>
             <div class="relative mx-auto mt-10 max-w-lg">
                 <img class="w-full rounded-2xl border border-gray-100 shadow" src="order2.jpg" alt="order-food">

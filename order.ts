@@ -1,10 +1,4 @@
-interface Order {
-  id: number;
-  name: string;
-  quantity: number;
-  createdAt: string;
-}
-
+import { Order } from "./interfaces.js";
 
 function order_init() {
   const form = document.querySelector("form") as HTMLFormElement;
@@ -30,7 +24,8 @@ function order_init() {
       id: parseInt(idInput.value),
       name: nameInput.value,
       quantity: parseInt(quantityInput.value),
-      createdAt: createdAtInput.value
+      createdAt: createdAtInput.value,
+      status: "Coming soon"
     }
 
     // Add new order to Map
@@ -70,5 +65,5 @@ function prefillFields() {
 
 export {
     order_init,
-    prefillFields
+    prefillFields,
 }
