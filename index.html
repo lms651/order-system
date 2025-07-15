@@ -206,6 +206,56 @@
                 </div>
 
             </div>
+            
+            <div
+            id="edit-modal"
+            class="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4 hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+            >
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+                <h2 id="modalTitle" class="text-xl font-bold text-gray-900 sm:text-2xl">Edit Order</h2>
+
+                <!-- Form Inputs -->
+                <form>
+                <div class="mt-4 mb-4">
+                    <label for="editStatus" class="block mb-1">Status</label>
+                    <input
+                    id="editStatus"
+                    type="text"
+                    class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div class="mb-4">
+                    <label for="editQuantity" class="block mb-1">Quantity</label>
+                    <input
+                    id="editQuantity"
+                    type="number"
+                    min="0"
+                    class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+                </form>
+
+                <!-- Buttons -->
+                <footer class="mt-6 flex justify-end gap-2">
+                <button
+                    type="button"
+                    id="cancelEdit"
+                    class="rounded bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200"
+                >Cancel</button>
+
+                <button
+                    type="button"
+                    id="saveEdit"
+                    class="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                >Save</button>
+                </footer>
+            </div>
+            </div>
+
             <div class="relative mx-auto mt-10 max-w-lg">
                 <img class="w-full rounded-2xl border border-gray-100 shadow" src="order2.jpg" alt="order-food">
             </div>

@@ -29,14 +29,16 @@ function renderOrdersOperator() {
 
     tdName.className = "px-3 py-2 whitespace-nowrap";
     const edtBtn = document.createElement("button");
-    edtBtn.innerText = '✎';
+    edtBtn.textContent = '✎';
     edtBtn.className = "bg-green-500 text-white px-2 py-1 rounded mr-2";
+    edtBtn.addEventListener("click", () => showEditModal(order.id));
     tdActions.appendChild(edtBtn);
 
 
     const dltBtn = document.createElement("button");
     dltBtn.textContent = "✘";
     dltBtn.className = "bg-red-500 text-white px-2 py-1 rounded";
+    dltBtn.addEventListener("click", () => handleDelete(order.id));
     tdActions.appendChild(dltBtn);
 
     tr.appendChild(tdId);
@@ -45,6 +47,35 @@ function renderOrdersOperator() {
 
     tbody.appendChild(tr);
   });
+}
+
+function showEditModal(orderId: number) {
+    console.log("Edit order", orderId);
+    const edtModal = document.getElementById("edit-modal") as HTMLElement;
+    edtModal.classList.remove("hidden");
+
+}
+
+function hideEditModal() {
+    const edtModal = document.getElementById("editModal") as HTMLElement;
+    edtModal.classList.add("hidden");
+}
+
+function handleDelete(orderId: number) {
+  // Load orders from localStorage
+  const ordersJSON = localStorage.getItem("orders");
+  const ordersMap: Map<number, Order> = ordersJSON
+    ? new Map<number, Order>(JSON.parse(ordersJSON))
+    : new Map();
+
+  // Remove order by ID
+  ordersMap.delete(orderId);
+
+  // Save back to localStorage
+  localStorage.setItem("orders", JSON.stringify(Array.from(ordersMap.entries())));
+
+  // Re-render table
+  renderOrdersOperator();
 }
 
 export {
