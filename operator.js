@@ -1,6 +1,46 @@
 import { getOrders } from "./status.js";
+let currentOrderID = null;
+document.addEventListener("DOMContentLoaded", () => {
+    operator_init();
+    // Attach modal listeners once here:
+    const cancelBtn = document.getElementById("cancelEdit");
+    const saveBtn = document.getElementById("save-edit");
+    console.log("Cancel button found?", cancelBtn);
+    console.log("Save button found?", saveBtn);
+    if (cancelBtn)
+        cancelBtn.addEventListener("click", hideEditModal);
+    if (saveBtn) {
+        saveBtn.addEventListener("click", () => {
+            console.log("Save button clicked!");
+            if (currentOrderID !== null) {
+                updateOrder(currentOrderID);
+                renderOrdersOperator();
+                hideEditModal();
+            }
+        });
+    }
+});
 function operator_init() {
     renderOrdersOperator();
+}
+function setupModalListeners() {
+    const cancelEdtBtn = document.getElementById("cancelEdit");
+    if (cancelEdtBtn) {
+        cancelEdtBtn.addEventListener("click", hideEditModal);
+    }
+    console.log("Trying to get Save button with id 'save-edit'");
+    const saveEdtBtn = document.getElementById("save-edit");
+    console.log("Save button element:", saveEdtBtn);
+    if (saveEdtBtn) {
+        saveEdtBtn.addEventListener("click", () => {
+            console.log("✅ Save button clicked!");
+            if (currentOrderID !== null) {
+                updateOrder(currentOrderID);
+                renderOrdersOperator();
+                hideEditModal();
+            }
+        });
+    }
 }
 function renderOrdersOperator() {
     const orders = getOrders();
@@ -37,12 +77,39 @@ function renderOrdersOperator() {
 }
 function showEditModal(orderId) {
     console.log("Edit order", orderId);
+    currentOrderID = orderId;
     const edtModal = document.getElementById("edit-modal");
     edtModal.classList.remove("hidden");
 }
+function updateOrder(orderId) {
+    // Use same getOrders helper
+    const ordersMap = getOrders();
+    const currentOrder = ordersMap.get(orderId);
+    if (!currentOrder)
+        return;
+    // Get selected status
+    const statusInput = document.querySelector("input[name='editStatus']:checked");
+    if (statusInput) {
+        currentOrder.status = statusInput.value;
+        console.log("Updated status:", currentOrder.status);
+    }
+    // Get quantity input
+    const quantityInput = document.getElementById("edit-quantity");
+    if (quantityInput && quantityInput.value.trim() !== "") {
+        const qty = parseInt(quantityInput.value);
+        if (!isNaN(qty)) {
+            currentOrder.quantity = qty;
+            console.log("Updated quantity:", currentOrder.quantity);
+        }
+    }
+    // Save back
+    ordersMap.set(orderId, currentOrder);
+    localStorage.setItem("orders", JSON.stringify(Array.from(ordersMap.entries())));
+}
 function hideEditModal() {
-    const edtModal = document.getElementById("editModal");
+    const edtModal = document.getElementById("edit-modal");
     edtModal.classList.add("hidden");
+    currentOrderID = null; // clear after hide
 }
 function handleDelete(orderId) {
     // Load orders from localStorage

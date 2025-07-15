@@ -1,13 +1,3 @@
-// interface Order {
-//   id: number;
-//   name: string;
-//   quantity: number;
-//   createdAt: string;
-//   status: string;
-// }
-// export {
-//     Order
-// }
 class Order {
     constructor(id, name, quantity, createdAt, status = "Coming Soon") {
         this.id = id;

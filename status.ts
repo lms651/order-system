@@ -1,5 +1,5 @@
 
-import { Order } from "./interfaces";
+import { Order } from "./interfaces.js";
 
 function status_init() {
     renderOrdersStatus();
