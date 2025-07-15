@@ -13,26 +13,44 @@ function order_init() {
     const nameInput = document.getElementById("order-name") as HTMLInputElement;
     const quantityInput = document.getElementById("quantity") as HTMLInputElement;
 
-    // Load orders from localStorage, parse as array of entries, then convert to Map
-    const ordersJSON = localStorage.getItem("orders");
-    const ordersMap: Map<number, Order> = ordersJSON
-      ? new Map<number, Order>(JSON.parse(ordersJSON))
-      : new Map();
 
-    // Create new order
-    const newOrder: Order = {
-      id: parseInt(idInput.value),
-      name: nameInput.value,
-      quantity: parseInt(quantityInput.value),
-      createdAt: createdAtInput.value,
-      status: "Coming soon"
+    const ordersJSON = localStorage.getItem("orders");
+
+    const ordersMap: Map<number, Order> = new Map();
+
+    if (ordersJSON) {
+      const entries: [number, any][] = JSON.parse(ordersJSON);
+      for (const [key, obj] of entries) {
+        // Recreate Order instances so can use toJson
+        const orderInstance = new Order(
+          obj.id,
+          obj.name,
+          obj.quantity,
+          obj.createdAt,
+          obj.status 
+        );
+        ordersMap.set(Number(key), orderInstance);
+      }
     }
 
-    // Add new order to Map
-    ordersMap.set(parseInt(idInput.value), newOrder);
+    // Create new order
+    const newOrder = new Order(
+      parseInt(idInput.value),
+      nameInput.value,
+      parseInt(quantityInput.value),
+      createdAtInput.value
+    );
+
+    // Store as JSON
+    ordersMap.set(newOrder.id, newOrder);
+
+
+    const serializedEntries = Array.from(ordersMap.entries()).map(([key, order]) => {
+      return [key, order.toJson()];
+    });
 
     // Save Map back to localStorage as array of entries
-    localStorage.setItem("orders", JSON.stringify(Array.from(ordersMap.entries())));
+    localStorage.setItem("orders", JSON.stringify(serializedEntries));
 
     // Clears form on submit
     form.reset();
