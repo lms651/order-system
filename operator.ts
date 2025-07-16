@@ -1,5 +1,5 @@
 import { getOrders } from "./status.js";
-import { Order } from "./interfaces.js";
+import { Order } from "./order.js";
 
 let currentOrderID: number | null = null;
 
