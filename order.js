@@ -8,19 +8,13 @@ function order_init() {
         // Take User Input
         const nameInput = document.getElementById("order-name");
         const quantityInput = document.getElementById("quantity");
-        // Load orders from localStorage, parse as array of entries, then convert to Map
-        // const ordersJSON = localStorage.getItem("orders");
-        // const ordersMap: Map<number, Order> = ordersJSON
-        //   ? new Map<number, Order>(JSON.parse(ordersJSON))
-        //   : new Map();
         const ordersJSON = localStorage.getItem("orders");
         const ordersMap = new Map();
         if (ordersJSON) {
             const entries = JSON.parse(ordersJSON);
             for (const [key, obj] of entries) {
-                // Recreate Order instances so methods like toJson() exist
-                const orderInstance = new Order(obj.id, obj.name, obj.quantity, obj.createdAt, obj.status // if you have status in constructor
-                );
+                // Recreate Order instances so can use toJson
+                const orderInstance = new Order(obj.id, obj.name, obj.quantity, obj.createdAt, obj.status);
                 ordersMap.set(Number(key), orderInstance);
             }
         }
@@ -28,15 +22,6 @@ function order_init() {
         const newOrder = new Order(parseInt(idInput.value), nameInput.value, parseInt(quantityInput.value), createdAtInput.value);
         // Store as JSON
         ordersMap.set(newOrder.id, newOrder);
-        // const newOrder: Order = {
-        //   id: parseInt(idInput.value),
-        //   name: nameInput.value,
-        //   quantity: parseInt(quantityInput.value),
-        //   createdAt: createdAtInput.value,
-        //   status: "Coming soon"
-        // }
-        // Add new order to Map
-        // ordersMap.set(parseInt(idInput.value), newOrder);
         const serializedEntries = Array.from(ordersMap.entries()).map(([key, order]) => {
             return [key, order.toJson()];
         });
@@ -44,6 +29,8 @@ function order_init() {
         localStorage.setItem("orders", JSON.stringify(serializedEntries));
         // Clears form on submit
         form.reset();
+        prefillFields();
+        console.log('trying to prefill');
         alert("Order submitted successfully!");
     });
 }

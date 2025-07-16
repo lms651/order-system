@@ -44,7 +44,6 @@ function order_init() {
     // Store as JSON
     ordersMap.set(newOrder.id, newOrder);
 
-
     const serializedEntries = Array.from(ordersMap.entries()).map(([key, order]) => {
       return [key, order.toJson()];
     });
@@ -54,6 +53,7 @@ function order_init() {
 
     // Clears form on submit
     form.reset();
+    prefillFields();
 
     alert("Order submitted successfully!");
   });

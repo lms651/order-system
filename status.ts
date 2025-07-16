@@ -22,7 +22,7 @@ function renderOrdersStatus() {
 
     orders.forEach((order) => {
     const tr = document.createElement("tr");
-    tr.className = "*:text-gray-900 *:first:font-medium";
+    tr.className = "*:first:font-medium"; // <-- Fixed here
 
     const tdId = document.createElement("td");
     tdId.className = "px-3 py-2 whitespace-nowrap";
@@ -40,12 +40,23 @@ function renderOrdersStatus() {
     tr.appendChild(tdCreatedAt);
 
     const tdStatus = document.createElement("td");
-    tdStatus.className = "px-3 py-2 whitespace-nowrap";
+    tdStatus.className = `px-3 py-2 whitespace-nowrap ${getStatusClass(order.status)}`;
     tdStatus.textContent = order.status;
     tr.appendChild(tdStatus);
 
     tbody.appendChild(tr);
   });
+}
+
+function getStatusClass(status: string): string {
+  switch (status) {
+    case "Ready":
+      return "text-green-600 font-bold";
+    case "Coming Soon":
+      return "text-yellow-600 font-semibold italic";
+    default:
+      return "text-gray-600";
+  }
 }
 
 export {

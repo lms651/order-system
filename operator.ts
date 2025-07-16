@@ -10,13 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = document.getElementById("cancelEdit");
   const saveBtn = document.getElementById("save-edit");
 
-  console.log("Cancel button found?", cancelBtn);
-  console.log("Save button found?", saveBtn);
-
   if (cancelBtn) cancelBtn.addEventListener("click", hideEditModal);
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
-      console.log("Save button clicked!");
       if (currentOrderID !== null) {
         updateOrder(currentOrderID);
         renderOrdersOperator();
@@ -28,30 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function operator_init() {
   renderOrdersOperator();
-}
-
-function setupModalListeners() {
-  const cancelEdtBtn = document.getElementById("cancelEdit") as HTMLButtonElement | null;
-  if (cancelEdtBtn) {
-    cancelEdtBtn.addEventListener("click", hideEditModal);
-  }
-
-  console.log("Trying to get Save button with id 'save-edit'");
-
-  const saveEdtBtn = document.getElementById("save-edit") as HTMLButtonElement | null;
-  console.log("Save button element:", saveEdtBtn);
-
-  if (saveEdtBtn) {
-    saveEdtBtn.addEventListener("click", () => {
-          console.log("✅ Save button clicked!");
-
-      if (currentOrderID !== null) {
-        updateOrder(currentOrderID);
-        renderOrdersOperator();
-        hideEditModal();
-      }
-    });
-  }
 }
 
 function renderOrdersOperator() {
@@ -99,7 +71,12 @@ function renderOrdersOperator() {
 }
 
 function showEditModal(orderId: number) {
-  console.log("Edit order", orderId);
+  const ordersMap = getOrders();
+  const order = ordersMap.get(orderId);
+  if (!order) return;
+
+  // Prefill fields
+  prefillEditModal(order);
   currentOrderID = orderId;
 
   const edtModal = document.getElementById("edit-modal") as HTMLElement;
@@ -117,7 +94,6 @@ function updateOrder(orderId: number) {
   const statusInput = document.querySelector("input[name='editStatus']:checked") as HTMLInputElement;
   if (statusInput) {
     currentOrder.status = statusInput.value;
-    console.log("Updated status:", currentOrder.status);
   }
 
   // Get quantity input
@@ -126,7 +102,6 @@ function updateOrder(orderId: number) {
     const qty = parseInt(quantityInput.value);
     if (!isNaN(qty)) {
       currentOrder.quantity = qty;
-      console.log("Updated quantity:", currentOrder.quantity);
     }
   }
 
@@ -134,6 +109,7 @@ function updateOrder(orderId: number) {
   ordersMap.set(orderId, currentOrder);
   localStorage.setItem("orders", JSON.stringify(Array.from(ordersMap.entries())));
 }
+
 function hideEditModal() {
   const edtModal = document.getElementById("edit-modal") as HTMLElement;
   edtModal.classList.add("hidden");
@@ -155,6 +131,24 @@ function handleDelete(orderId: number) {
 
   // Re-render table
   renderOrdersOperator();
+}
+
+function prefillEditModal(order: Order) {
+  // Prefill quantity
+  const quantityInput = document.getElementById("edit-quantity") as HTMLInputElement;
+  if (quantityInput) {
+    quantityInput.value = order.quantity.toString();
+  }
+
+  // Prefill status radio buttons
+  const statusRadios = document.querySelectorAll("input[name='editStatus']") as NodeListOf<HTMLInputElement>;
+  statusRadios.forEach((radio) => {
+    if (radio.value === order.status) {
+      radio.checked = true;
+    } else {
+      radio.checked = false;
+    }
+  });
 }
 
 export {
