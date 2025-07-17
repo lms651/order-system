@@ -18,11 +18,11 @@ function renderOrdersStatus() {
     const orders: Map<number, Order> = getOrders();
 
     const tbody = document.querySelector("tbody") as HTMLTableSectionElement;
-    tbody.innerHTML = ""; // clears any existing rows
+    tbody.innerHTML = ""; 
 
     orders.forEach((order) => {
     const tr = document.createElement("tr");
-    tr.className = "*:first:font-medium"; // <-- Fixed here
+    tr.className = "*:first:font-medium"; 
 
     const tdId = document.createElement("td");
     tdId.className = "px-3 py-2 whitespace-nowrap";

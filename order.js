@@ -30,8 +30,7 @@ function order_init() {
         // Clears form on submit
         form.reset();
         prefillFields();
-        console.log('trying to prefill');
-        alert("Order submitted successfully!");
+        toastr.success("Order placed!", "Success:");
     });
 }
 function prefillFields() {

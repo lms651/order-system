@@ -1,5 +1,7 @@
 import { Order } from "./interfaces.js";
 
+declare const toastr: any;
+
 function order_init() {
   const form = document.querySelector("form") as HTMLFormElement;
 
@@ -55,7 +57,8 @@ function order_init() {
     form.reset();
     prefillFields();
 
-    alert("Order submitted successfully!");
+    toastr.success("Order placed!", "Success:");
+
   });
 }
 

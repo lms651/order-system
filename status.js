@@ -11,10 +11,10 @@ function getOrders() {
 function renderOrdersStatus() {
     const orders = getOrders();
     const tbody = document.querySelector("tbody");
-    tbody.innerHTML = ""; // clears any existing rows
+    tbody.innerHTML = "";
     orders.forEach((order) => {
         const tr = document.createElement("tr");
-        tr.className = "*:first:font-medium"; // <-- Fixed here
+        tr.className = "*:first:font-medium";
         const tdId = document.createElement("td");
         tdId.className = "px-3 py-2 whitespace-nowrap";
         tdId.textContent = order.id.toString();

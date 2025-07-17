@@ -2,7 +2,7 @@ import { getOrders } from "./status.js";
 let currentOrderID = null;
 document.addEventListener("DOMContentLoaded", () => {
     operator_init();
-    // Attach modal listeners once here:
+    // Modal listeners
     const cancelBtn = document.getElementById("cancelEdit");
     const saveBtn = document.getElementById("save-edit");
     if (cancelBtn)
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateOrder(currentOrderID);
                 renderOrdersOperator();
                 hideEditModal();
+                toastr.success("Order Updated!", "Success:");
             }
         });
     }
@@ -23,7 +24,7 @@ function operator_init() {
 function renderOrdersOperator() {
     const orders = getOrders();
     const tbody = document.querySelector("#operator-table tbody");
-    tbody.innerHTML = ""; // clears any existing rows
+    tbody.innerHTML = "";
     orders.forEach((order) => {
         const tr = document.createElement("tr");
         tr.className = "*:text-gray-900 *:first:font-medium";
@@ -65,7 +66,6 @@ function showEditModal(orderId) {
     edtModal.classList.remove("hidden");
 }
 function updateOrder(orderId) {
-    // Use same getOrders helper
     const ordersMap = getOrders();
     const currentOrder = ordersMap.get(orderId);
     if (!currentOrder)

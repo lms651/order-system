@@ -1,12 +1,14 @@
 import { getOrders } from "./status.js";
 import { Order } from "./interfaces.js";
 
+declare const toastr: any;
+
 let currentOrderID: number | null = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   operator_init();
 
-  // Attach modal listeners once here:
+  // Modal listeners
   const cancelBtn = document.getElementById("cancelEdit");
   const saveBtn = document.getElementById("save-edit");
 
@@ -17,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateOrder(currentOrderID);
         renderOrdersOperator();
         hideEditModal();
+        toastr.success("Order Updated!", "Success:");
       }
     });
   }
@@ -30,7 +33,7 @@ function renderOrdersOperator() {
     const orders: Map<number, Order> = getOrders();
 
     const tbody = document.querySelector("#operator-table tbody") as HTMLTableSectionElement;
-    tbody.innerHTML = ""; // clears any existing rows
+    tbody.innerHTML = ""; 
 
     orders.forEach((order) => {
     const tr = document.createElement("tr");
@@ -84,7 +87,6 @@ function showEditModal(orderId: number) {
 }
 
 function updateOrder(orderId: number) {
-  // Use same getOrders helper
   const ordersMap: Map<number, Order> = getOrders();
 
   const currentOrder = ordersMap.get(orderId);

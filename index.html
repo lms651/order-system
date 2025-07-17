@@ -10,14 +10,20 @@
     <!--Tailwind-->
     <script src="https://cdn.tailwindcss.com"></script>
 
+     <!--JQuery for Toastr-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <title>Order System | Track your place in line!</title>
+    <!--Toastr CDN-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+
+    <title>Order System | Fast Food just got faster!</title>
 
 
 </head>
 
 <body>
-  <!-- Links so people can easily test -->
+  <!-- Links you can easily switch views -->
   <header>
   <ul>
     <li><a href="?mode=kiosk">Kiosk View</a></li>
@@ -51,7 +57,7 @@
         </div>
         <div class="relative z-20 mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900">
                     Welcome
                     <br>
                     <span class="text-blue-600">Place Order Here 📝
@@ -61,8 +67,8 @@
                     Enter name and quantity of items
                 </h2>
 
-                <!-- HTML Structure -->
-<form class="max-w-md mx-auto mt-16 p-4 bg-white shadow rounded">
+    <!-- Order Form -->
+    <form class="max-w-md mx-auto mt-16 p-4 bg-white shadow rounded">
     <h2 class="text-2xl font-bold mb-4">Order Form</h2>
     <div class="mb-4">
         <label for="date-time" class="block mb-1">Date/Time</label>
@@ -74,7 +80,7 @@
     </div>
     <div class="mb-4">
         <label for="order-name" class="block mb-1">Order Name</label>
-        <input type="text" id="order-name" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="text" id="order-name"   pattern="[A-Za-z\s]+" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="mb-4">
         <label for="quantity" class="block mb-1">Quantity</label>
@@ -85,7 +91,7 @@
     <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
     <button type="reset" class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</button>
 
-</form>
+    </form>
 
             </div>
             <div class="relative mx-auto mt-10 max-w-lg">
@@ -95,64 +101,65 @@
     </section>
   </div>
 
-  <!-- Status View -->
-  <div id="statusView" class="hidden">
-    
+    <!-- Status View -->
+    <div id="statusView" class="hidden">
+
     <section
-        class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-transparent to-transparent pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
+        class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-transparent to-transparent pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40 2xl:pt-48">
         <div class="relative z-10">
-            <div
-                class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
-                <svg class="h-[60rem] w-[100rem] flex-none stroke-blue-600 opacity-20" aria-hidden="true">
-                    <defs>
-                    <pattern id="status-pattern" width="200" height="200" x="50%" y="50%"
-                        patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
-                        <path d="M.5 200V.5H200" fill="none"></path>
-                    </pattern>
-                    </defs>
-                    <svg x="50%" y="50%" class="overflow-visible fill-blue-50">
-                        <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" stroke-width="0"></path>
-                    </svg>
-                    <rect width="100%" height="100%" stroke-width="0" fill="url(#status-pattern)">
-                    </rect>
-                </svg>
+        <div
+            class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
+            <svg class="h-[60rem] w-[100rem] flex-none stroke-blue-600 opacity-20" aria-hidden="true">
+            <defs>
+                <pattern id="status-pattern" width="200" height="200" x="50%" y="50%"
+                patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
+                <path d="M.5 200V.5H200" fill="none"></path>
+                </pattern>
+            </defs>
+            <svg x="50%" y="50%" class="overflow-visible fill-blue-50">
+                <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" stroke-width="0"></path>
+            </svg>
+            <rect width="100%" height="100%" stroke-width="0" fill="url(#status-pattern)"></rect>
+            </svg>
+        </div>
+        </div>
+
+        <div class="relative z-20 mx-auto max-w-screen-2xl px-6 xl:px-20 2xl:px-32">
+        <div class="mx-auto max-w-6xl text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-gray-900">
+            Order Status
+            <br>
+            <span class="text-blue-600">Don't let your food get cold!</span>
+            </h1>
+            <h2 class="mt-6 text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600">
+            Coming soon means less than 10 minutes!
+            </h2>
+
+            <!--ORDER STATUS DISPLAY TABLE-->
+            <div class="mt-12 overflow-x-auto rounded border border-gray-300 shadow-xl">
+            <table
+                class="min-w-full divide-y-2 divide-gray-200 text-base sm:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-800">
+                <thead class="text-center font-semibold text-gray-900 bg-white">
+                <tr>
+                    <th class="px-6 py-4 whitespace-nowrap">ID</th>
+                    <th class="px-6 py-4 whitespace-nowrap">Order Name</th>
+                    <th class="px-6 py-4 whitespace-nowrap">Created</th>
+                    <th class="px-6 py-4 whitespace-nowrap">Status</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                <!-- Rows inserted dynamically -->
+                </tbody>
+            </table>
             </div>
         </div>
-        <div class="relative z-20 mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                    View | Order | Status
-                    <br>
-                    <span class="text-blue-600">Order Queue for Pickup 📝
-            </span>
-                </h1>
-                <h2 class="mt-6 text-lg leading-8 text-gray-600">
-                    Keep track of where you are in the order pickup line
-                </h2><br>
 
-    <!--ORDER STATUS DISPLAY TABLE-->
-    <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
-    <table class="min-w-full divide-y-2 divide-gray-200">
-        <thead class="ltr:text-left rtl:text-right">
-        <tr class="*:font-medium *:text-gray-900">
-            <th class="px-3 py-2 whitespace-nowrap">ID</th>
-            <th class="px-3 py-2 whitespace-nowrap">Order Name</th>
-            <th class="px-3 py-2 whitespace-nowrap">Created</th>
-            <th class="px-3 py-2 whitespace-nowrap">Status</th>
-        </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-        <!--Rows with orders will be inserted dynamically here -->
-        </tbody>
-    </table>
-    </div>
-            </div>
-            <div class="relative mx-auto mt-10 max-w-lg">
-                <img class="w-full rounded-2xl border border-gray-100 shadow" src="order2.jpg" alt="order-food">
-            </div>
+        <div class="relative mx-auto mt-16 max-w-4xl">
+            <img class="w-full rounded-2xl border border-gray-100 shadow-2xl" src="order2.jpg" alt="order-food">
+        </div>
         </div>
     </section>
-  </div>
+    </div>
 
   <!-- Operator View -->
   <div id="operatorView" class="hidden">
@@ -182,11 +189,11 @@
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                     View | Edit | Delete
                     <br>
-                    <span class="text-blue-600"> This is operator view
+                    <span class="text-blue-600"> Operator view
             </span>
                 </h1>
                 <h2 class="mt-6 text-lg leading-8 text-gray-600">
-                    Staff can make changes to the orders here
+                    Staff can make changes to the order status & order quantity here
                 </h2><br>
 
                 <!--EDIT ORDER DISPLAY TABLE-->
@@ -231,7 +238,7 @@
                         value="Coming Soon"
                         checked
                         class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                        />
+                        >
                         <label for="status-coming" class="ml-2 block text-gray-700">Coming Soon</label>
                     </div>
                     <div class="flex items-center">
@@ -241,7 +248,7 @@
                         type="radio"
                         value="Ready"
                         class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                        />
+                        >
                         <label for="status-ready" class="ml-2 block text-gray-700">Ready</label>
                     </div>
                     </div>
@@ -254,7 +261,8 @@
                     type="number"
                     min="0"
                     class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    >
+                </div>
                 </div>
                 </form>
 
@@ -282,7 +290,7 @@
     </section>
   </div>
 
-  <script>
+    <script>
     function getMode() {
       const params = new URLSearchParams(window.location.search);
       return params.get("mode");
@@ -300,6 +308,12 @@
       document.body.innerHTML = "<h1>Invalid mode specified</h1>";
     }
   </script>
+
+  <!--JQuery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!--Toastr CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <script src="app.js" type="module"></script>
 
